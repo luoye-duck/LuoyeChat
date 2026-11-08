@@ -312,6 +312,42 @@ section.block{position:relative;z-index:1;padding:96px 0}
   padding:5px 12px;border-radius:999px;background:#efece5;color:#8d8272;
   font-size:12.5px;font-weight:600;border:1px solid #e3dccf;
 }
+/* 安卓版卡片：与 Windows 同色系，但底色更亮、更有存在感 */
+.dl-android{
+  background:
+    radial-gradient(130% 92% at 8% 0%,#fffdf9 0%,rgba(255,253,249,0) 58%),
+    linear-gradient(155deg,#fff8e9 0%,#fdefd8 52%,#fbe6c3 100%);
+  border-color:#ecd2a2;
+  box-shadow:0 22px 55px -28px rgba(160,111,48,.5),inset 0 1px 0 rgba(255,255,255,.75);
+}
+.dl-android::after{background:linear-gradient(90deg,#dfa963,#f6d39d 48%,#d9a35c)}
+.dl-android:hover{
+  transform:translateY(-5px);border-color:#e4bd7e;
+  box-shadow:0 30px 66px -32px rgba(160,111,48,.62),inset 0 1px 0 rgba(255,255,255,.8);
+}
+.dl-android .plat{
+  background:linear-gradient(150deg,#f9ead0,#f1d9ae);color:var(--accent-deep);
+  box-shadow:0 8px 16px -10px rgba(160,111,48,.75);
+}
+.dl-android ul li::before{background:var(--accent-deep);opacity:.85}
+/* 标题后的绿色圆角“推荐”徽标 */
+.rec{
+  display:inline-block;margin-left:8px;padding:1px 8px 2px;border-radius:8px;
+  background:linear-gradient(135deg,#45b378,#2f9459);color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:.05em;line-height:1.5;
+  vertical-align:2px;
+  box-shadow:0 6px 14px -8px rgba(47,148,89,.85),inset 0 1px 0 rgba(255,255,255,.25);
+}
+/* 右上角“全新登场”角标 */
+.new-ribbon{
+  position:absolute;top:4px;right:0;
+  padding:5px 13px 5px 15px;
+  border-bottom-left-radius:12px;
+  background:linear-gradient(135deg,#ddA85f,#c08a45 65%,#b07c3c);
+  color:#fffdf8;font-size:11.5px;font-weight:700;letter-spacing:.06em;
+  box-shadow:0 10px 22px -14px rgba(126,86,36,.95),inset 0 1px 0 rgba(255,255,255,.22);
+  pointer-events:none;
+}
 .dl .btn{width:100%}
 .dl-note{
   margin-top:26px;font-size:13px;color:var(--ink-3);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
@@ -689,7 +725,7 @@ footer{
     <div class="sec-head reveal">
       <span class="sec-tag">Download</span>
       <h2>选择你的平台</h2>
-      <p>Windows 版现已开放下载。移动端正在打磨中，很快就会见面。</p>
+      <p>Windows 与 Android 版均已开放下载，iPhone 版正在打磨中。</p>
     </div>
     <div class="dl-grid">
       <article class="dl reveal" style="--d:.02s">
@@ -710,25 +746,23 @@ footer{
         <a class="btn btn-primary" href="downloads/LuoyeChat_Setup_v2.0.1RC.exe" download data-dl>下载 Windows 版</a>
       </article>
 
-      <article class="dl soon reveal" style="--d:.1s">
+      <article class="dl dl-android reveal" style="--d:.1s">
+        <div class="new-ribbon">安卓版全新登场</div>
         <div class="dl-top">
           <div class="plat">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M7.2 2h9.6A1.2 1.2 0 0 1 18 3.2v17.6a1.2 1.2 0 0 1-1.2 1.2H7.2A1.2 1.2 0 0 1 6 20.8V3.2A1.2 1.2 0 0 1 7.2 2Zm.8 2v15.6h8V4H8Zm4 14.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Z"/></svg>
           </div>
           <div>
-            <h3>安卓版</h3>
-            <div class="sub">Android 8.0 及以上</div>
+            <h3>安卓版<span class="rec">推荐</span></h3>
+            <div class="sub">v2.5.0 · 约 0.4 MB · Android 8.0+</div>
           </div>
         </div>
         <ul>
-          <li>正在适配移动端交互与推送</li>
-          <li>与桌面端账号、消息互通</li>
+          <li>与桌面端账号、消息实时互通</li>
+          <li>竖屏专属毛玻璃界面，登录一次自动进入</li>
           <li>同样免费，同样无广告</li>
         </ul>
-        <span class="soon-tag">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          敬请期待
-        </span>
+        <a class="btn btn-primary" href="downloads/LuoyeChat_Android_v2.5.0.apk" download data-dl>下载安卓版</a>
       </article>
 
       <article class="dl soon reveal" style="--d:.18s">
@@ -941,7 +975,7 @@ footer{
       </details>
       <details class="reveal" style="--d:.2s">
         <summary>手机端什么时候发布？</summary>
-        <p>安卓版与 iPhone 版正在开发中，会与桌面端共用同一套账号体系。发布后会在本页与博客第一时间公布。</p>
+        <p>安卓版已开放下载（Android 8.0 及以上），与桌面端共用同一套账号体系，账号与消息实时互通；iPhone 版仍在开发中，发布后会在本页与博客第一时间公布。</p>
       </details>
     </div>
   </div>
