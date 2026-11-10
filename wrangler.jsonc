@@ -1,0 +1,13 @@
+{
+  "name": "luoyechat",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-10",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": ["/dl/win"]
+  }
+}
