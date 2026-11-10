@@ -1,3 +1,5 @@
-# Cloudflare Workers 单文件上限 25MiB，Windows 安装包 29.7MiB 超限
-# 不随站点部署，改走 GitHub raw 直链下载
+# Cloudflare Workers 单文件上限 25MiB
+# 1) Windows 安装包 29.7MiB 超限：不随站点部署，改走 /dl/win 代理下载
+# 2) .git 目录：含 exe 的历史对象（约 29.5MiB blob），同样超限
+.git/
 downloads/LuoyeChat_Setup_v2.0.1RC.exe
