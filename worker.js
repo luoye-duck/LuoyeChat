@@ -2,11 +2,11 @@
 // /dl/win -> 由 Cloudflare 边缘拉取 GitHub raw 的 Windows 安装包并流式转发
 // 其余所有请求 -> 直接返回静态站点文件 (ASSETS)
 // 背景: raw.githubusercontent.com 在中国大陆经常被重置, 访客直连下载失败;
-//      Workers assets 单文件上限 25MiB, 29.7MiB 的 exe 不能直接放进静态资源。
+//      Workers assets 单文件上限 25MiB, 73MiB 的 exe 不能直接放进静态资源, 故走 GitHub Release 资产。
 
 const WIN_URL =
-  "https://raw.githubusercontent.com/luoye-duck/LuoyeChat/main/downloads/LuoyeChat_Setup_v2.0.1RC.exe";
-const WIN_NAME = "LuoyeChat_Setup_v2.0.1RC.exe";
+  "https://github.com/luoye-duck/LuoyeChat/releases/download/v2.6.0/LuoyeChat_Win_v2.6.0.exe";
+const WIN_NAME = "LuoyeChat_Win_v2.6.0.exe";
 
 export default {
   async fetch(request, env, ctx) {
