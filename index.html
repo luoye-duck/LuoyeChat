@@ -667,7 +667,7 @@ footer{
   <div class="hero-grid"></div>
   <div class="hero-inner">
     <div class="hero-copy">
-      <span class="eyebrow"><span class="pulse"></span>LuoyeChat 落夜聊天 · 正式版 v3.3.0</span>
+      <span class="eyebrow"><span class="pulse"></span>LuoyeChat 落夜聊天 · 正式版 v3.3.1</span>
       <h1 class="typer" aria-label="永久免费无广告">
         <span id="typed" class="accent"></span><i class="caret" aria-hidden="true"></i>
       </h1>
@@ -687,7 +687,7 @@ footer{
     <div class="hero-visual reveal" style="--d:.2s">
       <div class="shots" id="shots">
         <span class="shots-tag">实机截图</span>
-        <figure class="shot active"><img src="assets/shot-main.webp" alt="LuoyeChat v3.3.0 Windows 客户端扫码登录页"></figure>
+        <figure class="shot active"><img src="assets/shot-main.webp" alt="LuoyeChat v3.3.1 Windows 客户端扫码登录页"></figure>
         <figure class="shot"><img src="assets/shot-login.webp" alt="LuoyeChat 登录页"></figure>
         <figure class="shot"><img src="assets/shot-register.webp" alt="LuoyeChat 注册页"></figure>
         <div class="shots-dots" id="shotsDots">
@@ -751,7 +751,7 @@ footer{
           </div>
           <div>
             <h3>Windows 64 位版</h3>
-            <div class="sub">安装版 · v3.3.0 · 约 50 MB</div>
+            <div class="sub">安装版 · v3.3.1 · 约 50 MB</div>
           </div>
         </div>
         <ul>
@@ -770,7 +770,7 @@ footer{
           </div>
           <div>
             <h3>安卓版<span class="rec">推荐</span></h3>
-            <div class="sub">v3.3.0 · 约 0.7 MB · Android 8.0+</div>
+            <div class="sub">v3.3.1 · 约 0.7 MB · Android 8.0+</div>
           </div>
         </div>
         <ul>
@@ -778,7 +778,7 @@ footer{
           <li>竖屏专属毛玻璃界面，登录一次自动进入</li>
           <li>同样免费，同样无广告</li>
         </ul>
-        <a class="btn btn-primary" href="downloads/LuoyeChat_Android_v3.3.0.apk" download data-dl>下载安卓版</a>
+        <a class="btn btn-primary" href="downloads/LuoyeChat_Android_v3.3.1.apk" download data-dl>下载安卓版</a>
       </article>
 
       <article class="dl soon reveal" style="--d:.18s">
@@ -885,7 +885,14 @@ footer{
       <div class="log-col">
       <div class="log reveal" id="changelogLog">
         <div class="log-item latest">
-          <h4><span class="v">v3.3.0</span><span class="new">最新</span><span class="date">2026-11-28</span></h4>
+          <h4><span class="v">v3.3.1</span><span class="new">最新</span><span class="date">2026-11-28</span></h4>
+          <ul>
+            <li>安卓版语音录制改为系统原生实现：授予麦克风权限后即可直接录音，彻底解决「已授权仍提示无法访问 / 被占用」的问题</li>
+            <li>电脑版与安卓版版本号同步升级至 v3.3.1，功能保持不变</li>
+          </ul>
+        </div>
+        <div class="log-item">
+          <h4><span class="v">v3.3.0</span><span class="date">2026-11-28</span></h4>
           <ul>
             <li>服务器文件保留 3 天：到期后电脑端与安卓端点下载或转发均提示「文件已过期」，聊天记录仍可查看</li>
             <li>安卓版新增微信风相册选图页：先申请相册权限，四列网格勾选，单次最多发送 9 张，勾选与发送按钮改为米黄色</li>
@@ -1000,11 +1007,11 @@ footer{
         </div>
       </div>
       <button class="log-toggle" id="logToggle" type="button"
-              aria-expanded="false" aria-controls="changelogLog" hidden>展开更早的 11 个版本</button>
+              aria-expanded="false" aria-controls="changelogLog" hidden>展开更早的 12 个版本</button>
       <span class="sr-only" id="logStatus" role="status" aria-live="polite"></span>
       </div>
       <aside class="about-card reveal" style="--d:.12s">
-        <div class="row"><span>当前版本</span><span>v3.3.0</span></div>
+        <div class="row"><span>当前版本</span><span>v3.3.1</span></div>
         <div class="row"><span>发布节奏</span><span>小步快跑</span></div>
         <div class="row"><span>安装包体积</span><span>约 50 MB</span></div>
         <div class="row"><span>广告数量</span><span>0</span></div>
@@ -1388,7 +1395,7 @@ function startVerify() {
 })();
 
 /* ============================================================
-   7. 更新日志折叠：默认 3 条，展开/收起更早 11 个版本（JS 渐进增强）
+   7. 更新日志折叠：默认 3 条，展开/收起更早 12 个版本（JS 渐进增强）
    ============================================================ */
 (function () {
   function boot() {
@@ -1401,7 +1408,7 @@ function startVerify() {
     btn.hidden = false;
     log.classList.add('is-collapsed');
     btn.setAttribute('aria-expanded', 'false');
-    btn.textContent = '展开更早的 11 个版本';
+    btn.textContent = '展开更早的 12 个版本';
 
     btn.addEventListener('click', function () {
       var open = btn.getAttribute('aria-expanded') === 'true';
@@ -1410,7 +1417,7 @@ function startVerify() {
         log.classList.remove('is-open');
         log.classList.add('is-collapsed');
         btn.setAttribute('aria-expanded', 'false');
-        btn.textContent = '展开更早的 11 个版本';
+        btn.textContent = '展开更早的 12 个版本';
         if (statusEl) statusEl.textContent = '已收起更新日志';
         window.scrollBy(0, btn.getBoundingClientRect().top - t);
         var top = btn.getBoundingClientRect().top;
@@ -1422,7 +1429,7 @@ function startVerify() {
         log.classList.add('is-open');
         btn.setAttribute('aria-expanded', 'true');
         btn.textContent = '收起更新日志';
-        if (statusEl) statusEl.textContent = '已展开 11 个更早版本';
+        if (statusEl) statusEl.textContent = '已展开 12 个更早版本';
       }
     });
   }
