@@ -219,10 +219,10 @@ header.scrolled{
 .shots-dots button:hover{background:#c4b493}
 .shots-dots button.on{width:22px;background:var(--accent)}
 .shots-tag{
-  position:absolute;top:42px;right:10px;z-index:7;
+  position:absolute;top:4px;right:12px;z-index:7;
   background:var(--teal);color:#f2fafa;
-  font-size:12px;font-weight:700;letter-spacing:.05em;
-  padding:7px 14px;border-radius:10px;
+  font-size:11px;font-weight:700;letter-spacing:.05em;
+  padding:4px 12px;border-radius:8px;
   box-shadow:0 12px 26px -14px rgba(60,110,112,.9);
 }
 .scroll-hint{
@@ -452,6 +452,37 @@ section.block{position:relative;z-index:1;padding:96px 0}
   opacity:.6;margin-top:9px;flex:none;
 }
 .log-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:46px;align-items:start}
+.log-col{ min-width:0; }
+.log-toggle{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-top:18px;padding:12px 18px;min-height:44px;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  font-size:14px;font-weight:700;color:var(--ink);
+  font-family:inherit;cursor:pointer;
+  transition:border-color .25s ease,background .25s ease;
+}
+.log-toggle:hover{ border-color:#dccbab;background:#fffdf8; }
+.log-toggle:focus{ outline:2px solid var(--accent);outline-offset:2px; }
+.log-toggle::after{
+  content:"";width:9px;height:9px;margin-top:-4px;
+  border-right:2px solid var(--accent-deep);border-bottom:2px solid var(--accent-deep);
+  transform:rotate(45deg);transition:transform .3s ease;
+}
+.log-toggle[aria-expanded="true"]::after{ transform:rotate(-135deg);margin-top:2px; }
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+.js .log.is-collapsed .log-item:nth-child(n+4){ display:none; }
+.js .log.is-collapsed::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:72px;z-index:1;
+  background:linear-gradient(180deg,rgba(248,244,236,0) 0%,var(--bg) 88%);
+  pointer-events:none;animation:logFade .25s ease both;
+}
+@keyframes logFade{ from{opacity:0} to{opacity:1} }
+.js .log.is-collapsed .log-item:nth-child(3){ padding-bottom:4px; }
+.js .log.is-open .log-item:nth-child(n+4){ display:block;animation:logReveal .34s ease both; }
+@keyframes logReveal{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
 
 /* ------------------------------------------------ 关于 */
 .about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:start}
@@ -571,28 +602,6 @@ footer{
 }
 .modal.shake{animation:shake .45s ease}
 
-/* ------------------------------------------------ 首屏升级提醒模态 */
-.notice-modal{width:min(452px,100%);padding:32px 30px 26px}
-.notice-modal .m-ico{
-  background:#fbeed8;color:#a5712c;
-  box-shadow:0 10px 24px -14px rgba(160,111,48,.7);
-}
-.notice-modal h3{font-size:19.5px;text-align:center;margin-bottom:14px}
-.notice-modal .n-body{
-  margin:0 0 22px;font-size:14px;line-height:1.9;color:var(--ink-2);
-  text-align:justify;text-justify:inter-ideograph;
-}
-.notice-modal .n-ver{
-  display:inline-block;padding:1px 8px;margin:0 1px;border-radius:7px;
-  background:#fdf3e2;color:#a5712c;font-weight:700;font-size:13px;
-  letter-spacing:.2px;white-space:nowrap;
-}
-.btn-r14{border-radius:14px}
-.notice-modal .btn{width:100%;margin-top:0}
-.n-tip{
-  margin:13px 0 0;font-size:12px;line-height:1.6;color:var(--ink-3);
-  text-align:center;letter-spacing:.1px;
-}
 .spinner{
   width:46px;height:46px;margin:6px auto 18px;
   border-radius:50%;
@@ -624,8 +633,14 @@ footer{
   .hero{padding-top:100px}
   .hero-cta .btn{flex:1 1 100%}
   .typer{font-size:clamp(25px,7.6vw,40px)}
-  .shots-tag{right:4px}
+  .shots-tag{right:12px}
   .map-legend-note{font-size:10.5px}
+}
+@media print{
+  .js .log.is-collapsed .log-item:nth-child(n+4){ display:block!important; }
+  .js .log.is-collapsed::after{ display:none!important; }
+  .log-toggle{ display:none!important; }
+  .reveal{ opacity:1!important; }
 }
 </style>
 </head>
@@ -671,7 +686,7 @@ footer{
     <div class="hero-visual reveal" style="--d:.2s">
       <div class="shots" id="shots">
         <span class="shots-tag">实机截图</span>
-        <figure class="shot active"><img src="assets/shot-main.webp" alt="LuoyeChat 主界面"></figure>
+        <figure class="shot active"><img src="assets/shot-main.webp" alt="LuoyeChat v3.3.0 Windows 客户端扫码登录页"></figure>
         <figure class="shot"><img src="assets/shot-login.webp" alt="LuoyeChat 登录页"></figure>
         <figure class="shot"><img src="assets/shot-register.webp" alt="LuoyeChat 注册页"></figure>
         <div class="shots-dots" id="shotsDots">
@@ -866,7 +881,8 @@ footer{
       <p>小步快跑，持续打磨。每一次更新都只做减法和细节。</p>
     </div>
     <div class="log-grid">
-      <div class="log reveal">
+      <div class="log-col">
+      <div class="log reveal" id="changelogLog">
         <div class="log-item latest">
           <h4><span class="v">v3.3.0</span><span class="new">最新</span><span class="date">2026-11-28</span></h4>
           <ul>
@@ -982,6 +998,10 @@ footer{
           </ul>
         </div>
       </div>
+      <button class="log-toggle" id="logToggle" type="button"
+              aria-expanded="false" aria-controls="changelogLog" hidden>展开更早的 11 个版本</button>
+      <span class="sr-only" id="logStatus" role="status" aria-live="polite"></span>
+      </div>
       <aside class="about-card reveal" style="--d:.12s">
         <div class="row"><span>当前版本</span><span>v3.3.0</span></div>
         <div class="row"><span>发布节奏</span><span>小步快跑</span></div>
@@ -1080,18 +1100,6 @@ footer{
   </div>
 </div>
 
-<!-- ------------------------------------------------ 首屏升级提醒 -->
-<div class="modal-mask" id="noticeMask" aria-hidden="true">
-  <div class="modal notice-modal" role="dialog" aria-modal="true" aria-label="版本升级提醒">
-    <button class="modal-x" id="noticeClose" aria-label="关闭">×</button>
-    <div class="m-ico">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v11"/><path d="M8 10.5l4 4 4-4"/><path d="M4.5 17.5v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-1"/></svg>
-    </div>
-    <h3>尊敬的用户，您好！</h3>
-    <p class="n-body">请安卓版软件版本号低于 <span class="n-ver">v3.3.0</span> 的用户尽快前往下载板块升级您的软件，感谢您对本软件的理解与支持！</p>
-    <button class="btn btn-primary btn-r14" id="noticeGo">前 往 下 载</button>
-  </div>
-</div>
 
 <script>
 /* ============================================================
@@ -1379,46 +1387,49 @@ function startVerify() {
 })();
 
 /* ============================================================
-   6. 首屏升级提醒：打开网页弹出，按钮直达下载板块
+   7. 更新日志折叠：默认 3 条，展开/收起更早 11 个版本（JS 渐进增强）
    ============================================================ */
 (function () {
-  var mask = document.getElementById('noticeMask');
-  if (!mask) return;
-  var q = location.search;
-  if (/[?&]nonotice=1/.test(q) || /[?&]snap=/.test(q)) return;
+  function boot() {
+    var btn = document.getElementById('logToggle');
+    var log = document.getElementById('changelogLog');
+    var statusEl = document.getElementById('logStatus');
+    if (!btn || !log) return;
 
-  function openNotice() {
-    mask.classList.add('show');
-    mask.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('js');
+    btn.hidden = false;
+    log.classList.add('is-collapsed');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.textContent = '展开更早的 11 个版本';
+
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      if (open) {
+        var t = btn.getBoundingClientRect().top;
+        log.classList.remove('is-open');
+        log.classList.add('is-collapsed');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = '展开更早的 11 个版本';
+        if (statusEl) statusEl.textContent = '已收起更新日志';
+        window.scrollBy(0, btn.getBoundingClientRect().top - t);
+        var top = btn.getBoundingClientRect().top;
+        if (top < 0 || top > window.innerHeight - btn.offsetHeight) {
+          btn.scrollIntoView({ block: 'center' });
+        }
+      } else {
+        log.classList.remove('is-collapsed');
+        log.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.textContent = '收起更新日志';
+        if (statusEl) statusEl.textContent = '已展开 11 个更早版本';
+      }
+    });
   }
-  function closeNotice() {
-    if (mask.classList.contains('show')) {
-      mask.classList.remove('show');
-      mask.setAttribute('aria-hidden', 'true');
-    }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
   }
-
-  document.getElementById('noticeClose').addEventListener('click', closeNotice);
-  mask.addEventListener('click', function (e) {
-    if (e.target === mask) closeNotice();
-  });
-  document.getElementById('noticeGo').addEventListener('click', function () {
-    closeNotice();
-    var target = document.getElementById('download');
-    if (target) {
-      setTimeout(function () {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 130);
-    }
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeNotice();
-  });
-
-  // 先让首页动画起步，再弹提醒
-  function boot() { setTimeout(openNotice, 700); }
-  if (document.readyState === 'complete') boot();
-  else window.addEventListener('load', boot);
 })();
 </script>
 </body>
