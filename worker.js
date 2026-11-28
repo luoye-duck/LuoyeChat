@@ -5,8 +5,8 @@
 //      Workers assets 单文件上限 25MiB, 73MiB 的 exe 不能直接放进静态资源, 故走 GitHub Release 资产。
 
 const WIN_URL =
-  "https://github.com/luoye-duck/LuoyeChat/releases/download/v3.3.1/LuoyeChat_Setup_v3.3.1.exe";
-const WIN_NAME = "LuoyeChat_Setup_v3.3.1.exe";
+  "https://github.com/luoye-duck/LuoyeChat/releases/download/v3.3.2/LuoyeChat_Setup_v3.3.2.exe";
+const WIN_NAME = "LuoyeChat_Setup_v3.3.2.exe";
 
 export default {
   async fetch(request, env, ctx) {
